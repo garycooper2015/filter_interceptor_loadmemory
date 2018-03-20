@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"    
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop" 
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-3.0.xsd
+http://www.springframework.org/schema/mvc
+http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+http://www.springframework.org/schema/tx
+http://www.springframework.org/schema/tx/spring-tx.xsd
+http://www.springframework.org/schema/aop
+http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 如果没有这两个，会报错No mapping found for HTTP request with URI in DispatcherServlet with name 'dispatcher'-->
+    <mvc:annotation-driven /> 
+	<mvc:default-servlet-handler />
+    
+    <!-- 搜索spring控件 -->
+    <context:component-scan base-package="com.fustack"></context:component-scan>
+    <!-- 视图页面配置 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/view/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+	<!-- 以静态变量保存ApplicationContext -->
+	<bean class="com.fustack.framework.util.SpringContextHolder" lazy-init="false" />
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/time/*" /> 
+			<bean class="com.fustack.framework.util.TimeBasedAccessInterceptor">
+				<property name="openingTime" value="11" />
+				<property name="closingTime" value="15" />
+			</bean>
+		</mvc:interceptor>
+	</mvc:interceptors>  		
+ 
+</beans>
