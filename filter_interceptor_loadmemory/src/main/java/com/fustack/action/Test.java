@@ -3,6 +3,7 @@ package com.fustack.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,9 @@ import com.fustack.service.TestService;
 @Controller
 public class Test {
 
+	@Autowired
+	TestService testservice;
+	
 	
 	@RequestMapping("/index")
 	public String f0(){
@@ -67,9 +71,9 @@ public class Test {
 	public String f6(Model model) {
 		
 		Map<String,String> map2 = new HashMap<String,String>();
-		TestService testservice = (TestService)SpringContextHolder.getBean("testServiceImpl");
+		//TestService testservice = (TestService)SpringContextHolder.getBean("testServiceImpl");
 
-		map2 = testservice.f1();
+		map2 = testservice.getMap1();
 		
 		model.addAttribute("map2",map2);
 		

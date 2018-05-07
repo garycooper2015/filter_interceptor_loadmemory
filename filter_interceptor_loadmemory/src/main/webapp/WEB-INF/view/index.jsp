@@ -72,7 +72,7 @@
 
 
   				<ul class="list-unstyled">
-  					<li><h2>示例三 加载内存数据 ApplicationContextAware</h2></li>
+  					<li><h2>示例三 加载内存数据 @PostConstruct</h2></li>
   					<li>应用启动时，会把测试数据加载到内存中</li>
   					<li>
   						当访问
